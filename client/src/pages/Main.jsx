@@ -1,24 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { MyContext } from "../App.jsx";
 
 const Main = () => {
-  const [branch, setBranch] = useState(null);
-  const [flag, setFlag] = useState(false);
-  const [subjects, setSubjects] = useState(null);
-  const [paper, setPaper] = useState(null);
-  const [semester, setSemester] = useState("");
-  const [data, setData] = useState(null);
-  const[branches,setBranches]=useState(null);
-  const[semesters,setSemesters]=useState(null);
-
+  const {
+    branch,
+    setBranch,
+    flag,
+    setFlag,
+    subjects,
+    setSubjects,
+    paper,
+    setPaper,
+    semester,
+    setSemester,
+    data,
+    setData,
+    branches,
+    setBranches,
+    semesters,
+    setSemesters,
+  } = useContext(MyContext);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const url = `${import.meta.env.VITE_API_URL}/getBranchesAndSemesters`;
         const response = await axios.get(url, {});
-        const{semesters,branches}=response.data;
+        const { semesters, branches } = response.data;
         setBranches(branches);
         setSemesters(semesters);
         //console.log("data", data);
@@ -27,6 +37,11 @@ const Main = () => {
       }
     };
     fetchData();
+    return () => {
+      setBranch(null);
+      setSemester(null);
+      setFlag(false);
+    };
   }, []);
 
   const handleSubmit = async (e) => {
@@ -39,7 +54,7 @@ const Main = () => {
         semester: semester,
       });
       setSubjects(response.data);
-      console.log("subjects",subjects);
+      console.log("subjects", subjects);
     } catch (error) {
       console.log(error);
     }
@@ -47,11 +62,12 @@ const Main = () => {
   const handleClick = async (paper) => {
     setPaper(paper);
     console.log("paper", paper);
-    const url = `${import.meta.env.VITE_API_URL}/getPaper`;
+    const url = `${import.meta.env.VITE_API_URL}/getSubjectPdf`;
     try {
       const response = await axios.post(url, {
+        semester: semester,
         branch: branch,
-        paper: paper,
+        subject: paper,
       });
       console.log(`response data`, response.data);
       if (response.data && response.data.url) {
@@ -66,9 +82,12 @@ const Main = () => {
   };
 
   return (
-    <div>
+    <div className="py-10 px-20 w-full h-screen">
+      <div className="flex">
+        <div className="mx-auto text-4xl mb-10 font-bold">pyq</div>
+      </div>
       {!flag ? (
-        <div>
+        <div className="w-full ">
           <form
             onSubmit={handleSubmit}
             className="space-y-4 p-4 border rounded-md"
@@ -127,14 +146,16 @@ const Main = () => {
         </div>
       ) : (
         <div>
-          <div>
+          <div className="grid grid-cols-3 gap-4">
             {subjects &&
               Object.values(subjects).map((paper, idx) => (
-                <div key={idx}>
-                  <Button variant="outline" onClick={() => handleClick(paper)}>
-                    {paper}
-                  </Button>
-                </div>
+                <button
+                  key={idx}
+                  className="h-32 bg-gray-100 hover:bg-gray-400 text-gray-900 font-mono text-lg font-bold p-6 rounded-lg shadow flex items-center justify-center"
+                  onClick={() => handleClick(paper)}
+                >
+                  {paper}
+                </button>
               ))}
           </div>
         </div>
