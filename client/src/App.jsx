@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Main from "./pages/Main.jsx";
 import Home from "./pages/Home.jsx";
 import Syllabus from "./pages/Syllabus.jsx";
+import Output from "./pages/Output.jsx";
+import Final from "./pages/Final.jsx";
 
 import { createContext, useState } from "react";
 
@@ -11,7 +12,7 @@ const App = () => {
   const [branch, setBranch] = useState(null);
   const [flag, setFlag] = useState(false);
   const [subjects, setSubjects] = useState(null);
-  const [paper, setPaper] = useState(null);
+  const [subject, setSubject] = useState(null);
   const [semester, setSemester] = useState("");
   const [data, setData] = useState(null);
   const [branches, setBranches] = useState(null);
@@ -27,8 +28,8 @@ const App = () => {
           setFlag,
           subjects,
           setSubjects,
-          paper,
-          setPaper,
+          subject,
+          setSubject,
           semester,
           setSemester,
           data,
@@ -40,7 +41,7 @@ const App = () => {
         }}
       >
         <BrowserRouter>
-          <div className="flex">
+          <div className="flex h-screen">
             <Sidebar />
             <MainContent />
           </div>
@@ -52,45 +53,33 @@ const App = () => {
 
 const Sidebar = () => {
   return (
-    // <div className="w-64 h-screen bg-gray-800 text-white p-4">
-    //   <h2 className="text-xl font-bold mb-4">Sidebar</h2>
-    //   <ul className="space-y-2">
-    //     <li>
-    //       <Link to="/">Home</Link>
-    //     </li>
-    //     <li>
-    //       <Link to="/main">Pyq</Link>
-    //     </li>
-    //     <li>
-    //       <Link to="/syllabus">Syllabus</Link>
-    //     </li>
-    //   </ul>
-    // </div>
-
-    <div className="group relative h-screen bg-gray-800 text-white transition-all duration-300 w-16 hover:w-56">
+    <div className="group relative h-full bg-yellow-300 text-black transition-all duration-300 w-16 hover:w-56 border-r-4 border-black shadow-[6px_6px_0px_rgba(0,0,0,1)]">
+      {/* Logo */}
       <div className="p-4 flex items-center">
         <span className="text-2xl">🔥</span>
         <span className="ml-3 text-lg font-bold opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-500">
           My App
         </span>
       </div>
+
+      {/* Menu */}
       <ul className="mt-6 space-y-4">
-        <li className="flex items-center p-2">
+        <li className="flex items-center p-2 rounded-xl bg-white border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:bg-pink-300 transition">
           <span>🏠</span>
-          <span className="ml-3 hidden group-hover:block">
+          <span className="ml-3 opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-500">
             <Link to="/">Home</Link>
           </span>
         </li>
-        <li className="flex items-center p-2">
+        <li className="flex items-center p-2 rounded-xl bg-white border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:bg-green-300 transition">
           <span>📄</span>
-          <span className="ml-3 hidden group-hover:block">
+          <span className="ml-3 opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-500">
             <Link to="/main">Pyq</Link>
           </span>
         </li>
-        <li className="flex items-center p-2">
+        <li className="flex items-center p-2 rounded-xl bg-white border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:bg-blue-300 transition">
           <span>📞</span>
-          <span className="ml-3 hidden group-hover:block">
-            <Link to="/syllabus">Syllabus</Link>
+          <span className="ml-3 opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-500">
+            <Link to="/home">collection</Link>
           </span>
         </li>
       </ul>
@@ -100,12 +89,15 @@ const Sidebar = () => {
 
 const MainContent = () => {
   return (
-    <div className="flex-1 h-screen bg-gray-200 p-6">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/main" element={<Main />} />
-        <Route path="/syllabus" element={<Syllabus />} />
-      </Routes>
+    <div className="flex-1 h-full overflow-y-auto p-8 bg-pink-200 border-l-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)]">
+      <div className="rounded-xl bg-white border-4 border-black p-6 shadow-[6px_6px_0px_rgba(0,0,0,1)] h-full">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Syllabus />} />
+          <Route path="/home/:semester/:branch" element={<Output />} />
+          <Route path="/home/:semester/:branch/:subject" element={<Final />} />
+        </Routes>
+      </div>
     </div>
   );
 };

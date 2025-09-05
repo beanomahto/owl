@@ -19,7 +19,7 @@ const subjects = {
     7: ["DSA", "OOPS"],
   },
   ECE: {
-    6: ["BSP", "COMPUTER NETWORK","VLSI","IOT","MICROWAVE ENGINNERING"],
+    6: ["BSP", "COMPUTER_NETWORK", "VLSI", "IOT", "MICROWAVE_ELECTRONICS"],
     7: ["CN", "DIGITAL"],
   },
 };
@@ -31,8 +31,8 @@ app.get("/getBranchesAndSemesters", (req, res) => {
   });
 });
 
-app.post("/getAllSubjects", (req, res) => {
-  const { branch, semester } = req.body;
+app.get("/getAllSubjects/:semester/:branch", (req, res) => {
+  const { branch, semester } = req.params;
   const ans = subjects[branch][semester];
   if (ans) {
     res.status(201).json(ans);
@@ -40,10 +40,10 @@ app.post("/getAllSubjects", (req, res) => {
 });
 
 app.post("/getSyllabusPdf", async (req, res) => {
-  const { semester, branch, subject } = req.body;
+  const { semester, branch, subject, type } = req.body;
 
   try {
-    const url = `${semester}/${branch}/${subject}/SYLLABUS.pdf`;
+    const url = `${semester}/${branch}/${subject}/${type}.pdf`;
     const { data } = supabase.storage
       .from("semesterQuestionBanks")
       .getPublicUrl(url);
