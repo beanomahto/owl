@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { MyContext } from "../App.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const InputForm = () => {
   const {
@@ -102,7 +103,7 @@ const InputForm = () => {
                      hover:bg-pink-300 hover:translate-x-[3px] hover:translate-y-[3px]
                      hover:shadow-none transition"
         >
-          Submit 🚀
+          Submit
         </button>
       </form>
     </div>

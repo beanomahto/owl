@@ -1,6 +1,8 @@
 import { useEffect, useContext } from "react";
+import axios from "axios";
+
 import { MyContext } from "../App.jsx";
-import { useNavigate } from "react-router-dom";
+import InputForm from "../components/InputForm.jsx";
 import { motion } from "framer-motion";
 
 const OscillatingCube = ({ size, top, left, color, delay }) => {
@@ -28,13 +30,30 @@ const OscillatingCube = ({ size, top, left, color, delay }) => {
   );
 };
 
-const Output = () => {
-  const { branch, subjects, setSubject, semester } = useContext(MyContext);
-  const navigate = useNavigate();
-  const handleClick = async (s) => {
-    setSubject(s);
-    navigate(`/home/${semester}/${branch}/${s}`);
-  };
+const Syllabus = () => {
+  const { setBranches, setSemesters } = useContext(MyContext);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const url = `${import.meta.env.VITE_API_URL}/getBranchesAndSemesters`;
+        const response = await axios.get(url, {});
+        const { semesters, branches } = response.data;
+        setBranches(branches);
+        setSemesters(semesters);
+        //console.log("data", data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+    // return () => {
+    //   setBranch(null);
+    //   setSemester(null);
+    //   setFlag(false);
+    // };
+  }, []);
+
   return (
     <div className="relative py-10 px-20 w-full min-h-screen bg-[#fdfdf9] overflow-hidden">
       {/* Background oscillating cubes */}
@@ -84,8 +103,8 @@ const Output = () => {
       {/* Foreground content */}
       <div className="relative z-10">
         {/* <div className="flex">
-              <div className="mx-auto text-4xl mb-10 font-bold">padhle bsdk</div>
-            </div> */}
+          <div className="mx-auto text-4xl mb-10 font-bold">padhle bsdk</div>
+        </div> */}
         {/* EZCrack box */}
         <div className="flex justify-center">
           <motion.div
@@ -103,27 +122,10 @@ const Output = () => {
           </motion.div>
         </div>
 
-        <div className="mt-8 h-screen">
-          <div className="grid grid-cols-3 gap-6">
-            {subjects &&
-              Object.values(subjects).map((s, idx) => (
-                <button
-                  key={idx}
-                  className="p-6 bg-teal-400 border-4 border-black rounded-xl 
-                         shadow-[6px_6px_0px_black] text-lg font-extrabold 
-                         hover:translate-x-1 hover:translate-y-1 
-                         hover:shadow-[2px_2px_0px_black] 
-                         transition-all duration-200"
-                  onClick={() => handleClick(s)}
-                >
-                  {s}
-                </button>
-              ))}
-          </div>
-        </div>
+        <InputForm />
       </div>
     </div>
   );
 };
 
-export default Output;
+export default Syllabus;

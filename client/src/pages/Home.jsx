@@ -1,18 +1,54 @@
-import { useState } from "react";
+import { motion } from "framer-motion";
 
 const Home = () => {
   return (
-    <div className="flex items-center justify-center h-full">
-      <div className="p-10 bg-white border-4 border-black rounded-xl shadow-[8px_8px_0px_rgba(0,0,0,1)]">
-        <h1 className="text-6xl font-extrabold text-yellow-500 drop-shadow-[4px_4px_0px_black]">
-          Welcome to पाठशाला
-        </h1>
-        <p className="mt-6 text-xl font-bold text-black drop-shadow-[2px_2px_0px_white]">
-          Your free resource hub 📚
-        </p>
-      </div>
+    // <div className="flex items-center justify-center h-full">
+    //   <div className="p-10 bg-white border-4 border-black rounded-xl shadow-[8px_8px_0px_rgba(0,0,0,1)]">
+    //     <h1 className="text-6xl font-extrabold text-yellow-500 drop-shadow-[4px_4px_0px_black]">
+    //       Welcome to पाठशाला
+    //     </h1>
+    //     <p className="mt-6 text-xl font-bold text-black drop-shadow-[2px_2px_0px_white]">
+    //       Your free resource hub
+    //     </p>
+    //   </div>
+    // </div>
+    <Hero/>
+
+  );
+};
+
+
+
+
+const Hero = () => {
+  return (
+    <div className="relative min-h-screen bg-[#fafaf5] flex items-center justify-center">
+      {/* background cubes */}
+      <motion.div
+        className="w-24 h-24 bg-orange-400 border-4 border-black absolute top-20 left-10"
+        animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
+        transition={{ duration: 3, repeat: Infinity }}
+      />
+      <motion.div
+        className="w-24 h-24 bg-teal-400 border-4 border-black absolute bottom-20 right-20"
+        animate={{ y: [0, -15, 0], rotate: [0, -5, 0] }}
+        transition={{ duration: 3, repeat: Infinity, delay: 1 }}
+      />
+
+      {/* EZCrack box */}
+      <motion.div
+        className="px-10 py-6 bg-teal-600 border-4 border-black text-6xl font-bold"
+        initial={{ rotate: -15, scale: 0.8, opacity: 0 }}
+        animate={{ rotate: -2, scale: 1, opacity: 1 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+      >
+        EZCrack
+      </motion.div>
     </div>
   );
 };
+
+
+
 
 export default Home;

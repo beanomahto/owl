@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home.jsx";
-import Syllabus from "./pages/Syllabus.jsx";
+import Input from "./pages/Input.jsx";
 import Output from "./pages/Output.jsx";
 import Final from "./pages/Final.jsx";
 
@@ -9,14 +9,13 @@ import { createContext, useState } from "react";
 export const MyContext = createContext();
 
 const App = () => {
+  const [semesters, setSemesters] = useState(null);
+  const [semester, setSemester] = useState("");
+  const [branches, setBranches] = useState(null);
   const [branch, setBranch] = useState(null);
-  const [flag, setFlag] = useState(false);
   const [subjects, setSubjects] = useState(null);
   const [subject, setSubject] = useState(null);
-  const [semester, setSemester] = useState("");
   const [data, setData] = useState(null);
-  const [branches, setBranches] = useState(null);
-  const [semesters, setSemesters] = useState(null);
 
   return (
     <div>
@@ -24,8 +23,6 @@ const App = () => {
         value={{
           branch,
           setBranch,
-          flag,
-          setFlag,
           subjects,
           setSubjects,
           subject,
@@ -90,10 +87,10 @@ const Sidebar = () => {
 const MainContent = () => {
   return (
     <div className="flex-1 h-full overflow-y-auto p-8 bg-pink-200 border-l-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)]">
-      <div className="rounded-xl bg-white border-4 border-black p-6 shadow-[6px_6px_0px_rgba(0,0,0,1)] h-full">
+      <div className="rounded-xl bg-white border-4 border-black  shadow-[6px_6px_0px_rgba(0,0,0,1)]">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Syllabus />} />
+          <Route path="/home" element={<Input />} />
           <Route path="/home/:semester/:branch" element={<Output />} />
           <Route path="/home/:semester/:branch/:subject" element={<Final />} />
         </Routes>
