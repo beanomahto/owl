@@ -9,8 +9,6 @@ const supabase = require("./utility/supabase.js");
 const corsOptions = {
   origin: ["http://localhost:5173", "https://pathshala-63yy.onrender.com"],
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type"],
 };
 app.use(cors(corsOptions));
 app.use(express.json());
