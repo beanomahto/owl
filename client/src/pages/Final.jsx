@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { MyContext } from "../App.jsx";
 import { motion } from "framer-motion";
 
@@ -29,17 +29,30 @@ const OscillatingCube = ({ size, top, left, color, delay }) => {
 };
 
 const Final = () => {
-  const {
-    branch,
-    subject,
-    semester,
-  } = useContext(MyContext);
+  const [years, setYears] = useState(null);
+  const [year, setYear] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const url = `${import.meta.env.VITE_API_URL}/getYear`;
+        const response = await axios.get(url, {});
+        setYears(response.data);
+        setYear(response.data[0]);
+        //console.log("data", data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+  const { branch, subject, semester } = useContext(MyContext);
   const type = {
     0: "syllabus",
-    1: "mid-1",
-    2: "mid-2",
+    1: "mid_1",
+    2: "mid_2",
     3: "end",
   };
+
   const handleClick = async (t) => {
     const url = `${import.meta.env.VITE_API_URL}/getSyllabusPdf`;
     try {
@@ -48,6 +61,7 @@ const Final = () => {
         branch: branch,
         subject: subject,
         type: t,
+        year: year,
       });
       console.log(`response data`, response.data);
       if (response.data && response.data.url) {
@@ -108,10 +122,20 @@ const Final = () => {
 
       {/* Foreground content */}
       <div className="relative z-10">
-        {/* <div className="flex">
-          <div className="mx-auto text-4xl mb-10 font-bold">padhle bsdk</div>
-        </div> */}
-        {/* EZCrack box */}
+        <div className="flex justify-end">
+          <select
+            className="absolute right-0 px-3 py-2 border-2 border-black rounded-lg bg-white text-black font-medium shadow-md focus:outline-none focus:ring-2 focus:ring-teal-400"
+            value={year}
+            onChange={(e) => setYear(e.target.value)}
+          >
+            {years &&
+              years.map((y, idx) => (
+                <option key={idx} value={y}>
+                  {y}
+                </option>
+              ))}
+          </select>
+        </div>
         <div className="flex justify-center">
           <motion.div
             className="px-10 py-6 bg-teal-300 border-4 border-black text-6xl font-bold shadow-[6px_6px_0px_black]"
@@ -129,25 +153,24 @@ const Final = () => {
         </div>
 
         <div className="mt-8 h-screen">
-      <div className="grid grid-cols-3 gap-6">
-        {Object.values(type).map((t, idx) => (
-          <button
-            key={idx}
-            className="p-6 bg-teal-300 border-4 border-black rounded-xl 
+          <div className="grid grid-cols-3 gap-6">
+            {Object.values(type).map((t, idx) => (
+              <button
+                key={idx}
+                className="p-6 bg-teal-300 border-4 border-black rounded-xl 
                          shadow-[6px_6px_0px_black] text-lg font-extrabold 
                          hover:translate-x-1 hover:translate-y-1 
                          hover:shadow-[2px_2px_0px_black] 
                          transition-all duration-200"
-            onClick={() => handleClick(t)}
-          >
-            {t}
-          </button>
-        ))}
+                onClick={() => handleClick(t)}
+              >
+                {t}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
-      </div>
-    </div>
-    
   );
 };
 

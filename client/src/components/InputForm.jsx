@@ -69,7 +69,7 @@ const InputForm = () => {
         </div>
 
         {/* Semester Dropdown */}
-        {semesters && (
+        {
           <div>
             <label className="block mb-2 font-bold text-lg">Semester</label>
             <select
@@ -81,18 +81,19 @@ const InputForm = () => {
                          focus:ring-4 focus:ring-pink-300 "
             >
               <option value="">Select Semester</option>
-              {semesters.map((sem) => (
-                <option
-                  key={sem}
-                  value={sem}
-                  className="px-4 py-2 cursor-pointer hover:bg-yellow-300 font-medium"
-                >
-                  {sem}
-                </option>
-              ))}
+              {semesters &&
+                semesters.map((sem) => (
+                  <option
+                    key={sem}
+                    value={sem}
+                    className="px-4 py-2 cursor-pointer hover:bg-yellow-300 font-medium"
+                  >
+                    {sem}
+                  </option>
+                ))}
             </select>
           </div>
-        )}
+        }
 
         {/* Submit Button */}
         <button

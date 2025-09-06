@@ -21,12 +21,12 @@ const Hero = () => {
 
       {/* EZCrack box */}
       <motion.div
-        className="px-10 py-6 bg-teal-600 border-4 border-black text-6xl font-bold"
+        className="px-10 py-6 bg-teal-300 border-4 border-black text-6xl font-bold"
         initial={{ rotate: -15, scale: 0.8, opacity: 0 }}
         animate={{ rotate: -2, scale: 1, opacity: 1 }}
         transition={{ duration: 1, ease: "easeOut" }}
       >
-        padhle bhai
+        Pathshala
       </motion.div>
     </div>
   );

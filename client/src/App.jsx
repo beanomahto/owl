@@ -3,6 +3,7 @@ import Home from "./pages/Home.jsx";
 import Input from "./pages/Input.jsx";
 import Output from "./pages/Output.jsx";
 import Final from "./pages/Final.jsx";
+import Diaries from "./pages/Diaries.jsx"
 
 import { createContext, useState } from "react";
 
@@ -53,9 +54,9 @@ const Sidebar = () => {
     <div className="group relative h-full bg-yellow-300 text-black transition-all duration-300 w-16 hover:w-56 border-r-4 border-black shadow-[6px_6px_0px_rgba(0,0,0,1)]">
       {/* Logo */}
       <div className="p-4 flex items-center">
-        <span className="text-2xl">*</span>
+        <span className="text-2xl"></span>
         <span className="ml-3 text-lg font-bold opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-500">
-          dashboard
+          Pathshala
         </span>
       </div>
 
@@ -70,7 +71,7 @@ const Sidebar = () => {
         <li className="flex items-center p-2 rounded-xl bg-white border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:bg-green-300 transition">
           <span>2</span>
           <span className="ml-3 opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-500">
-            <Link to="/main">Pyq</Link>
+            <Link to="/main">Placement Diaries</Link>
           </span>
         </li>
         <li className="flex items-center p-2 rounded-xl bg-white border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:bg-blue-300 transition">
@@ -91,6 +92,7 @@ const MainContent = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Input />} />
+          <Route path="/main" element={<Diaries />} />
           <Route path="/home/:semester/:branch" element={<Output />} />
           <Route path="/home/:semester/:branch/:subject" element={<Final />} />
         </Routes>

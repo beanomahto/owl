@@ -18,7 +18,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send(`hello world`);
 });
-
+const years = ["2025", "2026"];
 const semesters = ["1", "2", "3", "4", "5", "6", "7", "8"];
 const branches = ["CSE", "ECE"];
 const subjects = {
@@ -39,6 +39,10 @@ app.get("/getBranchesAndSemesters", (req, res) => {
   });
 });
 
+app.get("/getYear", (req, res) => {
+  res.status(201).json(years);
+});
+
 app.get("/getAllSubjects/:semester/:branch", (req, res) => {
   const { branch, semester } = req.params;
   const ans = subjects[branch][semester];
@@ -48,31 +52,17 @@ app.get("/getAllSubjects/:semester/:branch", (req, res) => {
 });
 
 app.post("/getSyllabusPdf", async (req, res) => {
-  const { semester, branch, subject, type } = req.body;
+  const { semester, branch, subject, type, year } = req.body;
 
   try {
-    const url = `${semester}/${branch}/${subject}/${type}.pdf`;
+    let url = "";
+    if (type == "syllabus")
+      url = `${semester}/${branch}/${subject}/syllabus.pdf`;
+    else url = `${semester}/${branch}/${subject}/${year}/${type}.pdf`;
     const { data } = supabase.storage
       .from("semesterQuestionBanks")
       .getPublicUrl(url);
-    console.log("data", data);
-    res.status(201).json({
-      url: data.publicUrl,
-    });
-  } catch (error) {
-    res.status(500).send("internal server eroor");
-  }
-});
-
-app.post("/getSubjectPdf", async (req, res) => {
-  const { semester, branch, subject } = req.body;
-
-  try {
-    const url = `pyq/${semester}/${branch}/${subject}.pdf`;
-    const { data } = supabase.storage
-      .from("semesterQuestionBanks")
-      .getPublicUrl(url);
-    console.log("data", data);
+    //console.log("data", data);
     res.status(201).json({
       url: data.publicUrl,
     });
