@@ -53,28 +53,28 @@ const Sidebar = () => {
     <div className="group relative h-full bg-yellow-300 text-black transition-all duration-300 w-16 hover:w-56 border-r-4 border-black shadow-[6px_6px_0px_rgba(0,0,0,1)]">
       {/* Logo */}
       <div className="p-4 flex items-center">
-        <span className="text-2xl">🔥</span>
+        <span className="text-2xl">*</span>
         <span className="ml-3 text-lg font-bold opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-500">
-          My App
+          dashboard
         </span>
       </div>
 
       {/* Menu */}
       <ul className="mt-6 space-y-4">
         <li className="flex items-center p-2 rounded-xl bg-white border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:bg-pink-300 transition">
-          <span>🏠</span>
+          <span>1</span>
           <span className="ml-3 opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-500">
             <Link to="/">Home</Link>
           </span>
         </li>
         <li className="flex items-center p-2 rounded-xl bg-white border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:bg-green-300 transition">
-          <span>📄</span>
+          <span>2</span>
           <span className="ml-3 opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-500">
             <Link to="/main">Pyq</Link>
           </span>
         </li>
         <li className="flex items-center p-2 rounded-xl bg-white border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:bg-blue-300 transition">
-          <span>📞</span>
+          <span>3</span>
           <span className="ml-3 opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-500">
             <Link to="/home">collection</Link>
           </span>
