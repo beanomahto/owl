@@ -3,7 +3,7 @@ import Home from "./pages/Home.jsx";
 import Input from "./pages/Input.jsx";
 import Output from "./pages/Output.jsx";
 import Final from "./pages/Final.jsx";
-import Diaries from "./pages/Diaries.jsx"
+import Diaries from "./pages/Diaries.jsx";
 
 import { createContext, useState } from "react";
 
@@ -63,21 +63,27 @@ const Sidebar = () => {
       {/* Menu */}
       <ul className="mt-6 space-y-4">
         <li className="flex items-center p-2 rounded-xl bg-white border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:bg-pink-300 transition">
-          <span>1</span>
+          <span>1.</span>
           <span className="ml-3 opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-500">
             <Link to="/">Home</Link>
           </span>
         </li>
         <li className="flex items-center p-2 rounded-xl bg-white border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:bg-green-300 transition">
-          <span>2</span>
+          <span>2.</span>
           <span className="ml-3 opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-500">
             <Link to="/main">Placement Diaries</Link>
           </span>
         </li>
         <li className="flex items-center p-2 rounded-xl bg-white border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:bg-blue-300 transition">
-          <span>3</span>
+          <span>3.</span>
           <span className="ml-3 opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-500">
-            <Link to="/home">collection</Link>
+            <Link to="/home">PYQ+Syllabus</Link>
+          </span>
+        </li>
+        <li className="flex items-center p-2 rounded-xl bg-white border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:bg-blue-300 transition">
+          <span>4.</span>
+          <span className="ml-3 opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-500">
+            <Link to="/main">AI-Tutor</Link>
           </span>
         </li>
       </ul>
