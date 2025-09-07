@@ -1,16 +1,32 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-app.use(cors());
+
 const dotenv = require("dotenv");
 dotenv.config();
 const supabase = require("./utility/supabase.js");
 
+// const corsOptions = {
+//   origin: ["http://localhost:5173", "https://pathshala-63yy.onrender.com"],
+//   credentials: true,
+// };
+// app.use(cors(corsOptions));
+
 const corsOptions = {
   origin: ["http://localhost:5173", "https://pathshala-63yy.onrender.com"],
   credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  optionsSuccessStatus: 204,
+  maxAge: 600, // cache preflight for 10 minutes
 };
+
+// apply CORS only once
 app.use(cors(corsOptions));
+
+// respond fast to OPTIONS requests
+
+
 app.use(express.json());
 
 app.get("/api", (req, res) => {
