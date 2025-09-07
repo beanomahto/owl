@@ -64,8 +64,8 @@ app.get("/getAllSubjects/:semester/:branch", (req, res) => {
   } else res.status(404).send(`backend error`);
 });
 
-app.post("/getSyllabusPdf", async (req, res) => {
-  const { semester, branch, subject, type, year } = req.body;
+app.get("/getSyllabusPdf", async (req, res) => {
+  const { semester, branch, subject, type, year } = req.query;
 
   try {
     let url = "";

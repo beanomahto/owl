@@ -56,12 +56,14 @@ const Final = () => {
   const handleClick = async (t) => {
     const url = `${import.meta.env.VITE_API_URL}/getSyllabusPdf`;
     try {
-      const response = await axios.post(url, {
-        semester: semester,
-        branch: branch,
-        subject: subject,
-        type: t,
-        year: year,
+      const response = await axios.get(url, {
+        params: {
+          semester: semester,
+          branch: branch,
+          subject: subject,
+          type: t,
+          year: year,
+        },
       });
       console.log(`response data`, response.data);
       if (response.data && response.data.url) {
