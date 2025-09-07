@@ -1,6 +1,20 @@
 import { motion } from "framer-motion";
+import { useEffect } from "react";
+import axios from "axios";
 
 const Home = () => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const url = `${import.meta.env.VITE_API_URL}/api`;
+        const response = await axios.get(url, {});
+        console.log(`render cold start initiation`);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
   return <Hero />;
 };
 
