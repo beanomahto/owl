@@ -1,37 +1,32 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-
 const dotenv = require("dotenv");
 dotenv.config();
 const supabase = require("./utility/supabase.js");
-
-// const corsOptions = {
-//   origin: ["http://localhost:5173", "https://pathshala-63yy.onrender.com"],
-//   credentials: true,
-// };
-// app.use(cors(corsOptions));
-
+//integration
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://pathshala-63yy.onrender.com",
+];
 const corsOptions = {
-  origin: ["http://localhost:5173", "https://pathshala-63yy.onrender.com"],
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   optionsSuccessStatus: 204,
-  maxAge: 600, // cache preflight for 10 minutes
+  maxAge: 600,
 };
-
-// apply CORS only once
 app.use(cors(corsOptions));
-
-// respond fast to OPTIONS requests
-
-
 app.use(express.json());
 
-app.get("/api", (req, res) => {
-  res.send(`hello world`);
-});
+//data
 const years = ["2025", "2026"];
 const semesters = ["1", "2", "3", "4", "5", "6", "7", "8"];
 const branches = ["CSE", "ECE"];
@@ -45,6 +40,10 @@ const subjects = {
     7: ["CN", "DIGITAL"],
   },
 };
+//routes
+app.get("/api", (req, res) => {
+  res.send(`hello world`);
+});
 
 app.get("/getBranchesAndSemesters", (req, res) => {
   res.status(201).json({
