@@ -7,7 +7,7 @@ const supabase = require("./utility/supabase.js");
 //integration
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://pathshala-63yy.onrender.com",
+  "https://pathshala-blond.vercel.app",
 ];
 const corsOptions = {
   origin: function (origin, callback) {
@@ -27,7 +27,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 //data
-const years = ["2025", "2026"];
+const years = ["2024", "2025"];
 const semesters = ["1", "2", "3", "4", "5", "6", "7", "8"];
 const branches = ["CSE", "ECE"];
 const subjects = {
