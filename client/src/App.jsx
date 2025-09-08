@@ -129,8 +129,16 @@ const Sidebar = () => {
 };
 const MainContent = () => {
   return (
-    <div className="flex-1 h-full overflow-y-auto p-8 bg-pink-200 border-l-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)]">
-      <div className="rounded-xl bg-white border-4 border-black  shadow-[6px_6px_0px_rgba(0,0,0,1)]">
+    <div
+      className="flex-1 min-h-screen overflow-y-auto 
+                 p-4 sm:p-6 md:p-8 
+                 bg-pink-200 border-l-4 border-black 
+                 shadow-[4px_4px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_rgba(0,0,0,1)]"
+    >
+      <div
+        className="rounded-xl bg-white border-4 border-black 
+                   shadow-[3px_3px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_rgba(0,0,0,1)] md:shadow-[6px_6px_0px_rgba(0,0,0,1)]"
+      >
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Input />} />
@@ -143,5 +151,6 @@ const MainContent = () => {
     </div>
   );
 };
+
 
 export default App;
