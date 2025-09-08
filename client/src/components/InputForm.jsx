@@ -24,7 +24,7 @@ const InputForm = () => {
     try {
       const url = `${
         import.meta.env.VITE_API_URL
-      }/getAllSubjects/${semester}/${branch}`;
+      }/api/getAllSubjects/${semester}/${branch}`;
       const response = await axios.get(url);
       if (response.data) {
         setSubjects(response.data);

@@ -36,7 +36,7 @@ const Syllabus = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = `${import.meta.env.VITE_API_URL}/getBranchesAndSemesters`;
+        const url = `${import.meta.env.VITE_API_URL}/api/getBranchesAndSemesters`;
         const response = await axios.get(url, {});
         const { semesters, branches } = response.data;
         setBranches(branches);
