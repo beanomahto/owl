@@ -22,7 +22,9 @@ const InputForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = `${import.meta.env.VITE_API_URL}/api/getAllSubjects/${semester}/${branch}`;
+      const url = `${
+        import.meta.env.VITE_API_URL
+      }/api/getAllSubjects/${semester}/${branch}`;
       const response = await axios.get(url);
       if (response.data) {
         setSubjects(response.data);
@@ -34,16 +36,18 @@ const InputForm = () => {
   };
 
   return (
-    <div className="flex items-center justify-center p-4 sm:p-6">
+    <div className="flex items-center justify-center px-2 sm:px-6 py-4 sm:py-6">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-4 sm:p-6 md:p-8 border-4 border-black
+        className="bg-white p-3 sm:p-6 md:p-8 border-4 border-black
                    shadow-[2px_2px_0px_black] sm:shadow-[4px_4px_0px_black] md:shadow-[6px_6px_0px_black]
                    rounded-xl w-full max-w-md space-y-4 sm:space-y-6"
       >
         {/* Branch Dropdown */}
         <div>
-          <label className="block mb-2 font-bold text-base sm:text-lg">Branch</label>
+          <label className="block mb-2 font-bold text-base sm:text-lg">
+            Branch
+          </label>
           <select
             value={branch || ""}
             onChange={(e) => setBranch(e.target.value)}
@@ -68,7 +72,9 @@ const InputForm = () => {
 
         {/* Semester Dropdown */}
         <div>
-          <label className="block mb-2 font-bold text-base sm:text-lg">Semester</label>
+          <label className="block mb-2 font-bold text-base sm:text-lg">
+            Semester
+          </label>
           <select
             value={semester || ""}
             onChange={(e) => setSemester(e.target.value)}
@@ -106,6 +112,5 @@ const InputForm = () => {
     </div>
   );
 };
-
 
 export default InputForm;
