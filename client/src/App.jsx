@@ -4,7 +4,7 @@ import Input from "./pages/Input.jsx";
 import Output from "./pages/Output.jsx";
 import Final from "./pages/Final.jsx";
 import Diaries from "./pages/Diaries.jsx";
-import AiTutor from "./pages/AiTutor.jsx"
+import AiTutor from "./pages/AiTutor.jsx";
 
 import { createContext, useState } from "react";
 
@@ -76,16 +76,24 @@ const Sidebar = () => {
         </div>
         <ul className="mt-6 space-y-4 px-2">
           <li className="p-2 bg-white border-2 border-black rounded-xl shadow-[3px_3px_0px_black] hover:bg-pink-300">
-            <Link to="/" onClick={() => setOpen(false)}>Home</Link>
+            <Link to="/" onClick={() => setOpen(false)}>
+              Home
+            </Link>
           </li>
           <li className="p-2 bg-white border-2 border-black rounded-xl shadow-[3px_3px_0px_black] hover:bg-green-300">
-            <Link to="/main" onClick={() => setOpen(false)}>Placement Diaries</Link>
+            <Link to="/main" onClick={() => setOpen(false)}>
+              Placement Diaries
+            </Link>
           </li>
           <li className="p-2 bg-white border-2 border-black rounded-xl shadow-[3px_3px_0px_black] hover:bg-blue-300">
-            <Link to="/home" onClick={() => setOpen(false)}>PYQ+Syllabus</Link>
+            <Link to="/home" onClick={() => setOpen(false)}>
+              PYQ+Syllabus
+            </Link>
           </li>
           <li className="p-2 bg-white border-2 border-black rounded-xl shadow-[3px_3px_0px_black] hover:bg-yellow-300">
-            <Link to="/AiTutor" onClick={() => setOpen(false)}>AI-Tutor</Link>
+            <Link to="/AiTutor" onClick={() => setOpen(false)}>
+              AI-Tutor
+            </Link>
           </li>
         </ul>
       </div>
@@ -135,22 +143,48 @@ const MainContent = () => {
                  bg-pink-200 border-l-4 border-black 
                  shadow-[4px_4px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_rgba(0,0,0,1)]"
     >
+      {/* 🔹 Routed content box */}
       <div
         className="rounded-xl bg-white border-4 border-black 
                    shadow-[3px_3px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_rgba(0,0,0,1)] md:shadow-[6px_6px_0px_rgba(0,0,0,1)]"
       >
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Input />} />
-          <Route path="/main" element={<Diaries />} />
-          <Route path="/home/:semester/:branch" element={<Output />} />
-          <Route path="/home/:semester/:branch/:subject" element={<Final />} />
-          <Route path="/AiTutor" element={<AiTutor />} />
-        </Routes>
+        {/* 🔹 Top-right links */}
+        <div className="fixed top-4 right-4 z-50">
+          <div className="flex items-center space-x-4 bg-white border-4 border-black shadow-[6px_6px_0px_black] rounded-xl px-4 py-2">
+            <a
+              href="https://github.com/beanomahto"
+              className="text-black font-bold hover:underline hover:bg-yellow-300 transition-colors"
+            >
+              Developer
+            </a>
+            <a
+              href="/main"
+              className="text-black font-bold hover:underline hover:bg-yellow-300 transition-colors"
+            >
+              Contribute
+            </a>
+          </div>
+        </div>
+
+        {/* 🔹 Routed pages */}
+        <div className="p-4 sm:p-6 md:p-8">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Input />} />
+            <Route path="/main" element={<Diaries />} />
+            <Route path="/home/:semester/:branch" element={<Output />} />
+            <Route
+              path="/home/:semester/:branch/:subject"
+              element={<Final />}
+            />
+            <Route path="/AiTutor" element={<AiTutor />} />
+            {/* <Route path="/developer" element={<Developer />} /> */}
+            {/* <Route path="/contribute" element={<Contribute />} /> */}
+          </Routes>
+        </div>
       </div>
     </div>
   );
 };
-
 
 export default App;
